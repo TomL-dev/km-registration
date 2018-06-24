@@ -1,0 +1,31 @@
+{
+	"name": "km-api",
+	"version": "0.0.1",
+	"description": "milage api backend",
+	"main": "app.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/TomL-dev/km-registration.git"
+	},
+	"author": "Tom",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/TomL-dev/km-registration/issues"
+	},
+	"homepage": "https://github.com/TomL-dev/km-registration#readme",
+	"dependencies": {
+		"body-parser": "1.18.3",
+		"dotenv": "6.0.0",
+		"express": "4.16.3",
+		"express-list-endpoints": "3.0.1",
+		"express-routemap": "1.1.0",
+		"get-routes": "0.2.0",
+		"jsonwebtoken": "8.2.2",
+		"mongodb": "3.0.10",
+		"morgan": "1.9.0",
+		"mysql": "2.15.0"
+	}
+}

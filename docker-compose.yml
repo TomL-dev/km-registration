@@ -1,0 +1,49 @@
+version: '3.3'
+
+services:
+
+  node-km-api:
+    image: 192.168.178.4:5000/node-km-api:0.0.1
+    restart: always
+    env_file:
+      - ./secrets/mysql/.env
+      - ./secrets/mongo/.env
+
+  mysql:
+    image: mysql
+    restart: always
+    env_file:
+      - ./secrets/mysql/.env
+    # environment:
+    #   MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    #   MYSQL_DATABASE: ${MYSQL_DATABASE}
+    #   MYSQL_USER: ${MYSQL_USER}
+    #   MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 9000:8080
+
+  mongo:
+    image: mongo
+    restart: always
+    env_file:
+      - ./secrets/mongo/.env
+    # environment:
+    #   MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
+    #   MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+    ports:
+      - 27017:27017
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 9001:8081
+    env_file:
+      - ./secrets/mongo/.env
+    # environment:
+    #   ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGU_USER}
+    #   ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_PASSWORD}
