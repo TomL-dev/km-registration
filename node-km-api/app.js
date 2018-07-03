@@ -1,5 +1,5 @@
 // imports packages
-require('dotenv').config()
+// require('dotenv').config()
 const express = require('express');
 const bodyParser = require('body-parser')
 const logger = require('morgan');
@@ -10,6 +10,7 @@ const car = require('./routes/car');
 const km = require('./routes/km');
 const auth = require('./routes/auth');
 const utils = require('./functions/util');
+const checkDatabase = require('./functions/checkDatabase');
 
 // initialize express
 const app = express();
@@ -43,12 +44,13 @@ app.get('/', (req, res) => {
 		message: 'hello'
 	});
 });
+// set auth router
 app.use('/auth', auth);
 
 // add security
-// app.use((req, res, next) => {
-// 	utils.checkJWT_Token(req, res, next);
-// });
+app.use((req, res, next) => {
+	utils.checkJWT_Token(req, res, next);
+});
 
 // set secure routes
 app.use('/car', car);
@@ -77,4 +79,7 @@ listEndpoints(app).forEach((endpoint) => {
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
 	console.log(`started on port ${port}`);
+
+	// checking database
+	checkDatabase.checkDatabaseOnStartup();
 });

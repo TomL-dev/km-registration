@@ -18,11 +18,6 @@ function checkRequest(req, res, next) {
 
 function checkJWT_Token(req, res, next) {
 	let token;
-	// console.log('raw headers: ' + JSON.stringify(req.rawHeaders));
-	// console.log('header: ' + JSON.stringify(req.headers));
-	// console.log('body: ' + JSON.stringify(req.body));
-
-	// console.log('headers: ' + JSON.stringify(req.headers));
 	if (req.body && req.body.token) {
 		console.log('getting token from body')
 		token = req.body.token
@@ -39,25 +34,12 @@ function checkJWT_Token(req, res, next) {
 	console.log("token: " + token)
 	if (!token) {
 		console.log('sending no token provided err')
-
-		// next(new Error('no token found'));
 		response.sendAuthorizationError(res, "No Authorization Token Found");
-		// res.status(403).send({
-		// 	message: "not authorized. no token provided"
-		// });
-		// return;
 	} else {
-
-		//const verified = jwt.verify(token, process.env.passphrase.toString());
-		//console.log('verified: ' + verified);
 		jwt.verify(token, process.env.JWT_KEY, (err, decoded) => {
 			if (err) {
 				console.log('error in verify:' + err)
-				// next(err);
 				response.sendAuthorizationError(res, "No Valid Token");
-				// res.status(403).send({
-				// 	message: "could not verify token"
-				// });
 			} else {
 				console.log('verified, NEXT()')
 				req.decoded = decoded;
@@ -73,7 +55,7 @@ function generateJWT_Token(isAdmin) {
 		admin: isAdmin
 	}
 	const token = jwt.sign(payload, jwtKey, {
-		expiresIn: '3600'
+		expiresIn: '3600s'
 	});
 	return token;
 }
