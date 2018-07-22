@@ -1,0 +1,3 @@
+global.QUERY_CREATE_DATABASE_SCHEMA = `CREATE DATABASE IF NOT EXISTS ${process.env.DB_NAME}`;
+global.QUERY_CREATE_CAR_TABLE = `CREATE TABLE IF NOT EXISTS ${process.env.DB_NAME}.car (idcar INT NOT NULL AUTO_INCREMENT, brand varchar(50) NOT NULL, model varchar(50) NOT NULL, licence varchar(8) NOT NULL, datestart INT NOT NULL, dateend INT, startmilage INT NOT NULL, PRIMARY KEY(idcar));`;
+global.QUERY_CREATE_KM_TABLE = `CREATE TABLE IF NOT EXISTS ${process.env.DB_NAME}.km ('id INT NOT NULL AUTO_INCREMENT,	date INT NOT NULL, location varchar(50) NOT NULL, milage INT NOT NULL, reason varchar(150), triptype INT NOT NULL, fkcar INT NOT NULL, PRIMARY KEY(id), CONSTRAINT FK_CAR FOREIGN KEY(fkcar) REFERENCES car(idcar));`;

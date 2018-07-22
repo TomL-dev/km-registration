@@ -1,0 +1,26 @@
+<h1>Example App: Home</h1>
+
+<select>
+	{{#Cars}}
+	<option value="{{idcar}}" {{selected}}>{{brand}}: {{model}} ({{licence}})</option>
+	{{/Cars}}
+</select>
+
+<br>
+
+<button id="myButton">Click me!</button>
+
+<br>
+
+<form action="/visual" method="POST">
+	First name:
+	<br>
+	<input type="text" name="firstname" value="Mickey">
+	<br> Last name:
+	<br>
+	<input type="text" name="lastname" value="Mouse">
+	<br>
+	<input type="text" name="name" placeholder="Add your kitten name here" />
+	<br>
+	<input type="submit" value="Submit">
+</form>

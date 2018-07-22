@@ -6,8 +6,8 @@ const createTable_car = 'CREATE TABLE IF NOT EXISTS ' + process.env.DB_NAME + '.
 	'brand varchar(50) NOT NULL, ' +
 	'model varchar(50) NOT NULL, ' +
 	'licence varchar(8) NOT NULL, ' +
-	'datestart INT, ' +
-	'dateend INT NOT NULL, ' +
+	'datestart INT NOT NULL, ' +
+	'dateend INT, ' +
 	'startmilage INT NOT NULL, ' +
 	'PRIMARY KEY(idcar));'
 const createTable_km = 'CREATE TABLE IF NOT EXISTS ' + process.env.DB_NAME + '.km ( ' +

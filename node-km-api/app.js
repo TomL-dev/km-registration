@@ -1,5 +1,6 @@
 // imports packages
 // require('dotenv').config()
+require('./model/queries');
 const express = require('express');
 const bodyParser = require('body-parser')
 const logger = require('morgan');
@@ -30,6 +31,11 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
+app.use((req, res, next) => {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	next();
+});
 // check if request is an options request, if true, send 200 OK
 // check if request is to an valid endpoint, if false, send 404 Not Found
 // else call next()
@@ -76,9 +82,11 @@ listEndpoints(app).forEach((endpoint) => {
 });
 
 // start server
-const port = process.env.PORT || 3000;
+const port = 8080;
 app.listen(port, () => {
 	console.log(`started on port ${port}`);
+
+	console.log(global.QUERY_CREATE_DATABASE_SCHEMA);
 
 	// checking database
 	checkDatabase.checkDatabaseOnStartup();
